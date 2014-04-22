@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guild Wars 2 timers: the Megaserver rotation</title>
+    <style type="text/css">
+    body {
+        width: 800px;
+        margin: 50px auto;
+        font-family: CronosPro,arial,helvetica,sans-serif;
+    }
+    #upcoming {
+        display: none;
+        margin: 0 auto 50px;
+        padding-top: 30px;
+        width: 400px;
+        height: 100px;
+        border: solid 1px #83878d;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    #upcoming {
+        background: #d6230c;
+        color: #fff;
+    }
+    #data h2 {
+        display: none;
+    }
+    #data table {
+        border-collapse: collapse;
+        min-width: 700px;
+    }
+    #data td, #data th {
+        border: solid 1px #83878d;
+        padding: 6px;
+        text-align: center;
+    }
+    #data thead td {
+        border-top: 0px;
+        border-left: 0px;
+    }
+    #data thead th {
+        text-align: center;
+        background: #2f2f2f;
+        color: #fff;
+    }
+    #data tbody th {
+        background-color: #f7b84e;
+    }
+    #data tbody tr:nth-child(2n) {
+        background-color: #f0f0f0;
+    }
+    #data tbody th {
+        background-color: #f7b84e;
+    }
+    #data tbody .lowlevel th {
+        background-color: #fff4dd;
+    }
+    #data tbody .highlevel th {
+        background-color: #d6230c;
+        color: #fff;
+    }
+    </style>
+</head>
+<body>
+<section id="upcoming">
+</section>
+<section id="data">
+    <h2>Raw data:</h2>
+    <table width="500">
+    <thead>
+    <tr>
+    <td></td>
+    <th>Waypoint</th>
+    <th>US Pacific Time</th>
+    <th>US Eastern Time</th>
+    <th>Central European Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <th>Megadestroyer</th>
+    <td>[&amp;BM0CAAA=]</td>
+    <td>16:00</td>
+    <td>19:00</td>
+    <td>1:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>16:15</td>
+    <td>19:15</td>
+    <td>1:15</td>
+    </tr>
+    <tr>
+    <th>TBD</th>
+    <td></td>
+    <td>16:30</td>
+    <td>19:30</td>
+    <td>1:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>16:45</td>
+    <td>19:45</td>
+    <td>1:45</td>
+    </tr>
+    <tr>
+    <th>The Shatterer</th>
+    <td>[&amp;BE4DAAA=]</td>
+    <td>17:00</td>
+    <td>20:00</td>
+    <td>2:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>17:15</td>
+    <td>20:15</td>
+    <td>2:15</td>
+    </tr>
+    <tr>
+    <th>Modniir Ulgoth</th>
+    <td>[&amp;BLEAAAA=]</td>
+    <td>17:30</td>
+    <td>20:30</td>
+    <td>2:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>17:45</td>
+    <td>20:45</td>
+    <td>2:45</td>
+    </tr>
+    <tr class="highlevel">
+    <th>Karka Queen</th>
+    <td>[&amp;BNcGAAA=]</td>
+    <td>18:00</td>
+    <td>21:00</td>
+    <td>3:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>18:15</td>
+    <td>21:15</td>
+    <td>3:15</td>
+    </tr>
+    <tr>
+    <th>Golem Mark II</th>
+    <td>[&amp;BNQCAAA=]</td>
+    <td>18:30</td>
+    <td>21:30</td>
+    <td>3:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>18:45</td>
+    <td>21:45</td>
+    <td>3:45</td>
+    </tr>
+    <tr class="highlevel">
+    <th>Tequatl</th>
+    <td>[&amp;BNABAAA=]</td>
+    <td>19:00</td>
+    <td>22:00</td>
+    <td>4:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>19:15</td>
+    <td>22:15</td>
+    <td>4:15</td>
+    </tr>
+    <tr>
+    <th>Claw of Jormag</th>
+    <td>[&amp;BHoCAAA=]</td>
+    <td>19:30</td>
+    <td>22:30</td>
+    <td>4:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>19:45</td>
+    <td>22:45</td>
+    <td>4:45</td>
+    </tr>
+    <tr class="highlevel">
+    <th>Evolved Jungle Wurm</th>
+    <td>[&amp;BKoBAAA=]</td>
+    <td>20:00</td>
+    <td>23:00</td>
+    <td>5:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>20:15</td>
+    <td>23:15</td>
+    <td>5:15</td>
+    </tr>
+    <tr>
+    <th>Taidha Covington</th>
+    <td>[&amp;BKgBAAA=]</td>
+    <td>20:30</td>
+    <td>23:30</td>
+    <td>5:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>20:45</td>
+    <td>23:45</td>
+    <td>5:45</td>
+    </tr>
+    <tr>
+    <th>Megadestroyer</th>
+    <td>[&amp;BM0CAAA=]</td>
+    <td>21:00</td>
+    <td>0:00</td>
+    <td>6:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>21:15</td>
+    <td>0:15</td>
+    <td>6:15</td>
+    </tr>
+    <tr>
+    <th>TBD</th>
+    <td></td>
+    <td>21:30</td>
+    <td>0:30</td>
+    <td>6:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>21:45</td>
+    <td>0:45</td>
+    <td>6:45</td>
+    </tr>
+    <tr>
+    <th>The Shatterer</th>
+    <td>[&amp;BE4DAAA=]</td>
+    <td>22:00</td>
+    <td>1:00</td>
+    <td>7:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>22:15</td>
+    <td>1:15</td>
+    <td>7:15</td>
+    </tr>
+    <tr>
+    <th>Modniir Ulgoth</th>
+    <td>[&amp;BLEAAAA=]</td>
+    <td>22:30</td>
+    <td>1:30</td>
+    <td>7:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>22:45</td>
+    <td>1:45</td>
+    <td>7:45</td>
+    </tr>
+    <tr>
+    <th>Golem Mark II</th>
+    <td>[&amp;BNQCAAA=]</td>
+    <td>23:00</td>
+    <td>2:00</td>
+    <td>8:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>23:15</td>
+    <td>2:15</td>
+    <td>8:15</td>
+    </tr>
+    <tr>
+    <th>Claw of Jormag</th>
+    <td>[&amp;BHoCAAA=]</td>
+    <td>23:30</td>
+    <td>2:30</td>
+    <td>8:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>23:45</td>
+    <td>2:45</td>
+    <td>8:45</td>
+    </tr>
+    <tr>
+    <th>The Shatterer</th>
+    <td>[&amp;BE4DAAA=]</td>
+    <td>24:00:00</td>
+    <td>3:00</td>
+    <td>9:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>0:15</td>
+    <td>3:15</td>
+    <td>9:15</td>
+    </tr>
+    <tr>
+    <th>Modniir Ulgoth</th>
+    <td>[&amp;BLEAAAA=]</td>
+    <td>0:30</td>
+    <td>3:30</td>
+    <td>9:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>0:45</td>
+    <td>3:45</td>
+    <td>9:45</td>
+    </tr>
+    <tr>
+    <th>Golem Mark II</th>
+    <td>[&amp;BNQCAAA=]</td>
+    <td>1:00</td>
+    <td>4:00</td>
+    <td>10:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>1:15</td>
+    <td>4:15</td>
+    <td>10:15</td>
+    </tr>
+    <tr>
+    <th>Claw of Jormag</th>
+    <td>[&amp;BHoCAAA=]</td>
+    <td>1:30</td>
+    <td>4:30</td>
+    <td>10:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>1:45</td>
+    <td>4:45</td>
+    <td>10:45</td>
+    </tr>
+    <tr>
+    <th>Taidha Covington</th>
+    <td>[&amp;BKgBAAA=]</td>
+    <td>2:00</td>
+    <td>5:00</td>
+    <td>11:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>2:15</td>
+    <td>5:15</td>
+    <td>11:15</td>
+    </tr>
+    <tr>
+    <th>Megadestroyer</th>
+    <td>[&amp;BM0CAAA=]</td>
+    <td>2:30</td>
+    <td>5:30</td>
+    <td>11:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>2:45</td>
+    <td>5:45</td>
+    <td>11:45</td>
+    </tr>
+    <tr>
+    <th>TBD</th>
+    <td></td>
+    <td>3:00</td>
+    <td>6:00</td>
+    <td>12:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>3:15</td>
+    <td>6:15</td>
+    <td>12:15</td>
+    </tr>
+    <tr class="highlevel">
+    <th>Karka Queen</th>
+    <td>[&amp;BNcGAAA=]</td>
+    <td>3:30</td>
+    <td>6:30</td>
+    <td>12:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>3:45</td>
+    <td>6:45</td>
+    <td>12:45</td>
+    </tr>
+    <tr>
+    <th>The Shatterer</th>
+    <td>[&amp;BE4DAAA=]</td>
+    <td>4:00</td>
+    <td>7:00</td>
+    <td>13:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>4:15</td>
+    <td>7:15</td>
+    <td>13:15</td>
+    </tr>
+    <tr class="highlevel">
+    <th>Tequatl</th>
+    <td>[&amp;BNABAAA=]</td>
+    <td>4:30</td>
+    <td>7:30</td>
+    <td>13:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>4:45</td>
+    <td>7:45</td>
+    <td>13:45</td>
+    </tr>
+    <tr>
+    <th>Modniir Ulgoth</th>
+    <td>[&amp;BLEAAAA=]</td>
+    <td>5:00</td>
+    <td>8:00</td>
+    <td>14:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>5:15</td>
+    <td>8:15</td>
+    <td>14:15</td>
+    </tr>
+    <tr class="highlevel">
+    <th>Evolved Jungle Wurm</th>
+    <td>[&amp;BKoBAAA=]</td>
+    <td>5:30</td>
+    <td>8:30</td>
+    <td>14:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>5:45</td>
+    <td>8:45</td>
+    <td>14:45</td>
+    </tr>
+    <tr>
+    <th>Golem Mark II</th>
+    <td>[&amp;BNQCAAA=]</td>
+    <td>6:00</td>
+    <td>9:00</td>
+    <td>15:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>6:15</td>
+    <td>9:15</td>
+    <td>15:15</td>
+    </tr>
+    <tr>
+    <th>Claw of Jormag</th>
+    <td>[&amp;BHoCAAA=]</td>
+    <td>6:30</td>
+    <td>9:30</td>
+    <td>15:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>6:45</td>
+    <td>9:45</td>
+    <td>15:45</td>
+    </tr>
+    <tr>
+    <th>Taidha Covington</th>
+    <td>[&amp;BKgBAAA=]</td>
+    <td>7:00</td>
+    <td>10:00</td>
+    <td>16:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>7:15</td>
+    <td>10:15</td>
+    <td>16:15</td>
+    </tr>
+    <tr>
+    <th>Megadestroyer</th>
+    <td>[&amp;BM0CAAA=]</td>
+    <td>7:30</td>
+    <td>10:30</td>
+    <td>16:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>7:45</td>
+    <td>10:45</td>
+    <td>16:45</td>
+    </tr>
+    <tr>
+    <th>TBD</th>
+    <td></td>
+    <td>8:00</td>
+    <td>11:00</td>
+    <td>17:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>8:15</td>
+    <td>11:15</td>
+    <td>17:15</td>
+    </tr>
+    <tr>
+    <th>The Shatterer</th>
+    <td>[&amp;BE4DAAA=]</td>
+    <td>8:30</td>
+    <td>11:30</td>
+    <td>17:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>8:45</td>
+    <td>11:45</td>
+    <td>17:45</td>
+    </tr>
+    <tr class="highlevel">
+    <th>Karka Queen</th>
+    <td>[&amp;BNcGAAA=]</td>
+    <td>9:00</td>
+    <td>12:00</td>
+    <td>18:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>9:15</td>
+    <td>12:15</td>
+    <td>18:15</td>
+    </tr>
+    <tr>
+    <th>Modniir Ulgoth</th>
+    <td>[&amp;BLEAAAA=]</td>
+    <td>9:30</td>
+    <td>12:30</td>
+    <td>18:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>9:45</td>
+    <td>12:45</td>
+    <td>18:45</td>
+    </tr>
+    <tr class="highlevel">
+    <th>Tequatl</th>
+    <td>[&amp;BNABAAA=]</td>
+    <td>10:00</td>
+    <td>13:00</td>
+    <td>19:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>10:15</td>
+    <td>13:15</td>
+    <td>19:15</td>
+    </tr>
+    <tr>
+    <th>Golem Mark II</th>
+    <td>[&amp;BNQCAAA=]</td>
+    <td>10:30</td>
+    <td>13:30</td>
+    <td>19:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>10:45</td>
+    <td>13:45</td>
+    <td>19:45</td>
+    </tr>
+    <tr class="highlevel">
+    <th>Evolved Jungle Wurm</th>
+    <td>[&amp;BKoBAAA=]</td>
+    <td>11:00</td>
+    <td>14:00</td>
+    <td>20:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>11:15</td>
+    <td>14:15</td>
+    <td>20:15</td>
+    </tr>
+    <tr>
+    <th>Claw of Jormag</th>
+    <td>[&amp;BHoCAAA=]</td>
+    <td>11:30</td>
+    <td>14:30</td>
+    <td>20:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>11:45</td>
+    <td>14:45</td>
+    <td>20:45</td>
+    </tr>
+    <tr>
+    <th>Taidha Covington</th>
+    <td>[&amp;BKgBAAA=]</td>
+    <td>12:00</td>
+    <td>15:00</td>
+    <td>21:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>12:15</td>
+    <td>15:15</td>
+    <td>21:15</td>
+    </tr>
+    <tr>
+    <th>Megadestroyer</th>
+    <td>[&amp;BM0CAAA=]</td>
+    <td>12:30</td>
+    <td>15:30</td>
+    <td>21:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>12:45</td>
+    <td>15:45</td>
+    <td>21:45</td>
+    </tr>
+    <tr>
+    <th>TBD</th>
+    <td></td>
+    <td>13:00</td>
+    <td>16:00</td>
+    <td>22:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>13:15</td>
+    <td>16:15</td>
+    <td>22:15</td>
+    </tr>
+    <tr>
+    <th>The Shatterer</th>
+    <td>[&amp;BE4DAAA=]</td>
+    <td>13:30</td>
+    <td>16:30</td>
+    <td>22:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>13:45</td>
+    <td>16:45</td>
+    <td>22:45</td>
+    </tr>
+    <tr>
+    <th>Modniir Ulgoth</th>
+    <td>[&amp;BLEAAAA=]</td>
+    <td>14:00</td>
+    <td>17:00</td>
+    <td>23:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Jungle Wurm</th>
+    <td>[&amp;BEEFAAA=]</td>
+    <td>14:15</td>
+    <td>17:15</td>
+    <td>23:15</td>
+    </tr>
+    <tr>
+    <th>Golem Mark II</th>
+    <td>[&amp;BNQCAAA=]</td>
+    <td>14:30</td>
+    <td>17:30</td>
+    <td>23:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Shadow Behemoth</th>
+    <td>[&amp;BPwAAAA=]</td>
+    <td>14:45</td>
+    <td>17:45</td>
+    <td>23:45</td>
+    </tr>
+    <tr>
+    <th>Claw of Jormag</th>
+    <td>[&amp;BHoCAAA=]</td>
+    <td>15:00</td>
+    <td>18:00</td>
+    <td>0:00</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Svanir Shaman</th>
+    <td>[&amp;BH4BAAA=]</td>
+    <td>15:15</td>
+    <td>18:15</td>
+    <td>0:15</td>
+    </tr>
+    <tr>
+    <th>Taidha Covington</th>
+    <td>[&amp;BKgBAAA=]</td>
+    <td>15:30</td>
+    <td>18:30</td>
+    <td>0:30</td>
+    </tr>
+    <tr class="lowlevel">
+    <th>Fire Elemental</th>
+    <td>[&amp;BEYAAAA=]</td>
+    <td>15:45</td>
+    <td>18:45</td>
+    <td>0:45</td>
+    </tr>
+    </tbody>
+    </table>
+</section>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="./handlebars-v1.3.0.js"></script>
+<script id="upcoming-template" type="text/x-handlebars-template">
+    <span class="name">{{name}}</span>
+    in
+    <span class="time">{{minutesuntil time}}</span>
+    minutes<br>
+    <span class="waypoint">{{waypoint}}</span>
+</script>
+<script type="text/javascript">
+$(function() {
+    var now = new Date();
+    var offset = (-7 * 60) + now.getTimezoneOffset();
+
+    // grab all the data, convert the times from PDT into minutes since midnight of the current time zone
+    var upcoming = [];
+    $('#data tbody tr').each(function(i, elem) {
+        var $elem = $(elem);
+        var time = $elem.find('td').eq(1).text().split(':');
+        time = (time[0] * 60) + parseInt(time[1], 10) - offset;
+        if (time < 0) {
+            time = 1440 + time;
+        } else if (time > 1440) {
+            time = time - 1440;
+        }
+        upcoming.push({
+            name: $elem.find('th').text()
+            ,waypoint: $elem.find('td').eq(0).text()
+            ,time: time
+        });
+    });
+    upcoming.sort(function(a, b) {
+        if (a.time < b.time) {
+            return -1;
+        }
+        if (a.time > b.time) {
+            return 1;
+        }
+        return 0;
+    });
+
+    var minutes_until = function(minutes) {
+        var now = new Date();
+        var minutes_since_midnight = (now.getHours() * 60) + now.getMinutes();
+        return minutes - minutes_since_midnight;
+    }
+    Handlebars.registerHelper('minutesuntil', minutes_until);
+    var template = Handlebars.compile($('#upcoming-template').html());
+
+    var current = false;
+    var minutes_since_midnight = -minutes_until(0);
+    $.each(upcoming, function(i, value) {
+        if (value.time > minutes_since_midnight) {
+            current = i;
+            return false;
+        }
+    });
+
+    console.log('current?', current, upcoming[current]);
+    if (current === false) {
+        return;
+    }
+
+    var $upcoming = $('#upcoming').show();
+    var interval = setInterval(function() {
+        if (minutes_until(upcoming[current].time) < 0) {
+            current++;
+        }
+        if (current >= upcoming.length) {
+            current = 0;
+        }
+        $upcoming.html(template(upcoming[current]));
+    }, 1000);
+});
+</script>
+</body>
+</html>
