@@ -29,6 +29,7 @@
     }
     #upcoming div.boss::before {
         background: #2f2f2f;
+        color: #fff;
         width:100%;
         position: absolute;
         top:0;left:0;
@@ -47,8 +48,38 @@
     }
     #upcoming #prev.boss {
         background: #f7b84e;
+        color: #2f2f2f;
         -webkit-transform: scale(0.85);
     }
+
+    #upcoming div.boss .name {
+        position: absolute;
+        left: 20px;
+        top: 30px;
+        font-size: 150%;
+    }
+    #upcoming div.boss .waypoint {
+        position: absolute;
+        left: 25px;
+        bottom: 15px;
+    }
+    #upcoming div.boss .time {
+        position: absolute;
+        right: 25px;
+        background: #2f2f2f;
+        color: #fff;
+        font-size: 200%;
+        padding: 5px;
+    }
+    #upcoming div.boss .time::after {
+        content: " minutes";
+        font-size:50%;
+    }
+    #upcoming div#prev.boss .time {
+        background: transparent;
+    }
+
+    /* data table display */
     #data h2 {
         display: none;
     }
@@ -93,9 +124,21 @@
     The <a href="https://www.guildwars2.com/en/news/the-megaserver-system-world-bosses-and-events/">April 2014</a> update to Guild Wars 2 changed the long-established system of boss spawns. Now there's a schedule, synchronized across all servers (not that servers mean as much as they used to). But you probably don't want to hunt on a table for something not in your timezone...
 </section>
 <section id="upcoming">
-    <div id="prev" class="boss"></div>
-    <div id="current" class="boss"></div>
-    <div id="next" class="boss"></div>
+    <div id="prev" class="boss">
+        <div class="name">{{name}}</div>
+        <div class="time">{{minutesuntil time}}</div>
+        <div class="waypoint">{{waypoint}}</div>
+    </div>
+    <div id="current" class="boss">
+        <div class="name">{{name}}</div>
+        <div class="time">{{minutesuntil time}}</div>
+        <div class="waypoint">{{waypoint}}</div>
+    </div>
+    <div id="next" class="boss">
+        <div class="name">{{name}}</div>
+        <div class="time">{{minutesuntil time}}</div>
+        <div class="waypoint">{{waypoint}}</div>
+    </div>
 </section>
 <section id="data">
     <h2>Raw data:</h2>
@@ -786,14 +829,6 @@
     </table>
 </section>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-<script type="text/javascript" src="./handlebars-v1.3.0.js"></script>
-<script id="upcoming-template" type="text/x-handlebars-template">
-    <span class="name">{{name}}</span>
-    in
-    <span class="time">{{minutesuntil time}}</span>
-    minutes<br>
-    <span class="waypoint">{{waypoint}}</span>
-</script>
 <script type="text/javascript">
 $(function() {
     var now = new Date();
@@ -840,8 +875,6 @@ $(function() {
         var minutes_since_midnight = (now.getHours() * 60) + now.getMinutes();
         return minutes - minutes_since_midnight;
     }
-    Handlebars.registerHelper('minutesuntil', minutes_until);
-    var template = Handlebars.compile($('#upcoming-template').html());
 
     var current = false;
     var minutes_since_midnight = -minutes_until(0);
@@ -856,6 +889,14 @@ $(function() {
         return;
     }
 
+    var update_timer = function($elem, data) {
+        $elem
+            .find('.name').text(data.name).end()
+            .find('.waypoint').text(data.waypoint).end()
+            .find('.time').text(minutes_until(data.time)).end()
+            ;
+    }
+
     var $previous = $('#prev');
     var $current = $('#current');
     var $next = $('#next');
@@ -863,9 +904,9 @@ $(function() {
         if (minutes_until(upcoming[current].time) < 0) {
             current = looped_index(upcoming, current + 1);
         }
-        $previous.html(template(upcoming[looped_index(upcoming, current- 1)]));
-        $current.html(template(upcoming[current]));
-        $next.html(template(upcoming[looped_index(upcoming, current + 1)]));
+        update_timer($previous, upcoming[looped_index(upcoming, current - 1)]);
+        update_timer($current, upcoming[current]);
+        update_timer($next, upcoming[looped_index(upcoming, current + 1)]);
     }
     update_timers();
     var interval = setInterval(update_timers, 10000);
