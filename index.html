@@ -873,9 +873,12 @@ $(function() {
         }
         return index;
     }
-    var minutes_until = function(minutes) {
+    var minutes_until = function(minutes, loop) {
         var now = new Date();
         var minutes_since_midnight = (now.getHours() * 60) + now.getMinutes();
+        if (loop && minutes < minutes_since_midnight) {
+            minutes += 1440;
+        }
         return minutes - minutes_since_midnight;
     }
 
@@ -892,11 +895,11 @@ $(function() {
         return;
     }
 
-    var update_timer = function($elem, data) {
+    var update_timer = function($elem, data, loop) {
         $elem
             .find('.name').text(data.name).end()
             .find('.waypoint').text(data.waypoint).end()
-            .find('.time').text(minutes_until(data.time)).end()
+            .find('.time').text(minutes_until(data.time, loop)).end()
             ;
     }
 
@@ -909,7 +912,7 @@ $(function() {
         }
         update_timer($previous, upcoming[looped_index(upcoming, current - 1)]);
         update_timer($current, upcoming[current]);
-        update_timer($next, upcoming[looped_index(upcoming, current + 1)]);
+        update_timer($next, upcoming[looped_index(upcoming, current + 1)], true);
     }
     update_timers();
     var interval = setInterval(update_timers, 10000);
