@@ -8,9 +8,7 @@
         margin: 50px auto;
         font-family: CronosPro,arial,helvetica,sans-serif;
     }
-    #explanation {
-        display: none;
-    }
+
     #upcoming {
         margin: 0 auto 50px;
         width: 400px;
@@ -80,6 +78,9 @@
     }
 
     /* data table display */
+    #data {
+        margin-top: 50px;
+    }
     #data h2 {
         display: none;
     }
@@ -120,9 +121,6 @@
     </style>
 </head>
 <body>
-<section id="explanation">
-    The <a href="https://www.guildwars2.com/en/news/the-megaserver-system-world-bosses-and-events/">April 2014</a> update to Guild Wars 2 changed the long-established system of boss spawns. Now there's a schedule, synchronized across all servers (not that servers mean as much as they used to). But you probably don't want to hunt on a table for something not in your timezone...
-</section>
 <section id="upcoming">
     <div id="prev" class="boss">
         <div class="name">{{name}}</div>
@@ -139,6 +137,10 @@
         <div class="time">{{minutesuntil time}}</div>
         <div class="waypoint">{{waypoint}}</div>
     </div>
+</section>
+<section id="explanation">
+    <p>The <a href="https://www.guildwars2.com/en/news/the-megaserver-system-world-bosses-and-events/">April 2014</a> update to Guild Wars 2 changed the long-established system of boss spawns. Now there's a schedule, synchronized across all servers (not that servers mean as much as they used to). But you probably don't want to hunt on a table for something not in your timezone...</p>
+    <p>Paste the waypoint code (<code>[&etcetcetc=]</code>) into the game to get a chat link for it.</p>
 </section>
 <section id="data">
     <h2>Raw data:</h2>
